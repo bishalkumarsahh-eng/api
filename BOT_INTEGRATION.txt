@@ -1,0 +1,14 @@
+For the uploaded ElevenYTS bot set these environment variables:
+
+ARTISTBOTS_API_URL=https://YOUR-HEROKU-APP.herokuapp.com
+ARTISTBOTS_KEY=YOUR_API_KEY
+ENABLE_API=True
+
+The existing bot already calls:
+GET {ARTISTBOTS_API_URL}/download
+params:
+url=<video id>
+type=audio or video
+api_key=<ARTISTBOTS_KEY>
+
+So no changes are required to the request format.
