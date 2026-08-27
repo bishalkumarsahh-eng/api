@@ -1,26 +1,30 @@
-# ElevenYTS-Compatible Music API
+# ElevenYTS Universal Provider API v4
 
-Heroku-ready compatibility API designed around the uploaded ElevenYTS music bot.
+This API is compatible with the uploaded ElevenYTS bot:
 
-## Compatible endpoint
-The bot calls:
+GET /download?url=<id>&type=audio|video&api_key=<key>
 
-`GET /download?url=<video_id_or_url>&type=audio|video&api_key=<key>`
+Unlike the previous placeholder version, this version can proxy an **authorized upstream media provider** that returns the actual media bytes.
 
-The endpoint is intentionally designed as a provider gateway. Configure an authorized media/catalog provider to supply playable content.
+## Required Heroku Config Vars
+API_KEY=your-secret
+UPSTREAM_DOWNLOAD_URL=https://your-authorized-provider.example/download
+UPSTREAM_API_KEY=provider-secret (only if required)
 
-## Environment variables
-- API_KEY
-- ADMIN_KEY
-- ALLOWED_ORIGINS=*
-- RATE_LIMIT_PER_MINUTE=60
-- MAX_PROVIDER_URL_AGE_SECONDS=900
+The upstream provider is fixed by environment configuration; clients cannot choose arbitrary URLs.
 
-## Bot configuration
-Set:
-- ARTISTBOTS_API_URL=https://YOUR-APP.herokuapp.com
-- ARTISTBOTS_KEY=<API_KEY>
-- ENABLE_API=True
+## Upstream request
+The API forwards:
+- url=<identifier>
+- type=audio|video
+
+and, if configured, adds:
+- X-API-Key: UPSTREAM_API_KEY
+
+The upstream must return HTTP 200 with playable media bytes.
+
+## Status
+GET /status shows whether the upstream provider is configured.
 
 ## Important
-The default provider is a safe placeholder and will return 501 until an authorized provider is configured. This project does not include DRM circumvention or unauthorized downloading.
+This project is a provider gateway. It does not bypass DRM, authentication challenges, or obtain media from sources you are not authorized to access.

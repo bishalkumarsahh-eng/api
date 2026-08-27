@@ -1,0 +1,17 @@
+API APP CONFIG VARS
+
+API_KEY = choose-your-secret
+ALLOWED_ORIGINS = *
+RATE_LIMIT_PER_MINUTE = 300
+
+UPSTREAM_DOWNLOAD_URL = URL of your authorized media provider's download endpoint
+UPSTREAM_API_KEY = provider key, if your provider requires one
+UPSTREAM_TIMEOUT_SECONDS = 120
+
+BOT APP CONFIG VARS
+
+ARTISTBOTS_API_URL = https://YOUR-HEROKU-API-DOMAIN
+ARTISTBOTS_KEY = exactly the same value as API_KEY
+ENABLE_API = True
+
+Do not set PORT manually.
